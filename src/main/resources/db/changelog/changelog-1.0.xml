@@ -1,0 +1,28 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="2021-05-19" author="Triin Salmus">
+        <createTable tableName="water">
+            <column name="id" type="integer" autoIncrement="true">
+                <constraints unique="true"/>
+            </column>
+            <column name="name" type="text"/>
+            <column name="amount" type="numeric"/>
+            <column name="unit" type="text"/>
+            <column name="date" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2021-05-19 create purpose table" author="Triin Salmus">
+        <createTable tableName="purpose">
+            <column name="name" type="text">
+                <constraints unique="true"/>
+<!--                <constraints foreignKeyName="fk_purpose_water" references="water(name)"/>-->
+            </column>
+            <column name="purpose_amount" type="numeric"/>
+            <column name="purpose_unit" type="text"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
