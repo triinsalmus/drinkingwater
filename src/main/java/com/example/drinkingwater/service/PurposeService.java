@@ -2,22 +2,26 @@ package com.example.drinkingwater.service;
 
 import com.example.drinkingwater.dto.Purpose;
 import com.example.drinkingwater.repository.PurposeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
+@Slf4j
+@RequiredArgsConstructor
 public class PurposeService {
 
-    @Autowired
-    private PurposeRepository purposeRepository;
+    private PurposeRepository repository;
 
     public void addPurpose(Purpose purpose) {
-        purposeRepository.addPurpose(purpose.getName(), purpose.getAmount(), purpose.getUnit());
+        repository.save(purpose);
     }
 
     public void updatePurpose(Purpose purpose){
-        purposeRepository.deletePurpose(purpose.getName());
-        purposeRepository.addPurpose(purpose.getName(), purpose.getAmount(), purpose.getUnit());
+        repository.delete(purpose);
+        addPurpose(purpose);
     }
 
 

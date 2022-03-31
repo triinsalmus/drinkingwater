@@ -2,24 +2,27 @@ package com.example.drinkingwater.service;
 
 import com.example.drinkingwater.dto.Water;
 import com.example.drinkingwater.repository.WaterRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class WaterService {
 
-    @Autowired
-    private WaterRepository waterRepository;
+    private WaterRepository repository;
 
     Date date = new Date();
 
     public void addWater(Water water) {
-        waterRepository.addWater(water.getName(), water.getAmount(), water.getUnit(), date);
+        repository.save(water);
     }
 
     public void reduceWater(Water water){
-        waterRepository.reduceWater(water.getName(), water.getAmount(), water.getUnit());
+        water.setAmount(-water.getAmount());
+        addWater(water);
     }
 }

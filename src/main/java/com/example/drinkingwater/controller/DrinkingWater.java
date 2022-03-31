@@ -4,38 +4,36 @@ import com.example.drinkingwater.dto.Purpose;
 import com.example.drinkingwater.dto.Water;
 import com.example.drinkingwater.service.PurposeService;
 import com.example.drinkingwater.service.WaterService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@RequiredArgsConstructor
 @RequestMapping("/water")
 @RestController
 public class DrinkingWater {
 
-    @Autowired
     private PurposeService purposeService;
-
-    @Autowired
     private WaterService waterService;
 
-    @PostMapping("/addpurpose")
+    @PostMapping("/add-purpose")
     public void addPurpose(@RequestBody Purpose purpose) {
         purposeService.addPurpose(purpose);
     }
 
-    @PostMapping("/updatepurpose")
+    @PostMapping("/update-purpose")
     public void updatePurpose(@RequestBody Purpose purpose) {
         purposeService.updatePurpose(purpose);
     }
 
-    @PostMapping("/addwater")
+    @PostMapping("/add-water")
     public void addWater(@RequestBody Water water) {
         waterService.addWater(water);
     }
 
-    @PostMapping("/reducewater") //nope - kustutab kõik, kus sama kogus
+    @PostMapping("/reduce-water")
     public void reduceWater(@RequestBody Water water) {
         waterService.reduceWater(water);
     }
